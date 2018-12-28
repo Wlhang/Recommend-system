@@ -1,0 +1,35 @@
+{% extends "users/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+    <h2>设计师推荐系统</h2>
+{% endblock header %}
+
+{% block content %}
+    <style>
+		.test{background:#e0e0e0;}
+		.test1{background:#e0e0e0;height: 271px;padding-left: 30px;padding-top: 0px}
+		.clear{padding: 0; margin: 0}
+    </style>
+    <div class="col-md-6">
+        <form method="post" action="{% url 'clothing_recommend:Recommend' %}" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <font color="red">{{ status }}</font>
+            {% buttons %}
+                <button name="submit" class="btn btn-primary">Recommend</button>
+            {% endbuttons %}
+
+            <input type="hidden" name="next" value="{% url 'clothing_recommend:Recommend' %}"/>
+        </form>
+    </div>
+    <div class="col-md-6 test1">
+        <br><font size="5">畅销程度（A>B>C）</font></br>
+        <br><font size="5">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;A:&emsp;{{ A }}%</font></br>
+
+        <br><font size="5">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;B:&emsp;{{ B }}%</font></br>
+
+        <br><font size="5">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;C:&emsp;{{ C }}%</font></br>
+    </div>
+
+{% endblock content %}
